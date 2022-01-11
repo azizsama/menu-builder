@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AzizSama\\MenuBuilder\\MenuBuilderServiceProvider"
+                "AzizSama\\MenuBuilder\\Providers\\MenuBuilderServiceProvider"
             ]
         }
     }
