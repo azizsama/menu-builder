@@ -107,7 +107,6 @@ return [
     |--------------------------------------------------------------------------
     */
     'filters' => [
-        // 'AzizSama\MenuBuilder\Filters\ActiveFilter',
-        // 'AzizSama\MenuBuilder\Filters\PermissionFilter',
+        AzizSama\MenuBuilder\Filters\AuthFilter::class,
     ],
 ];

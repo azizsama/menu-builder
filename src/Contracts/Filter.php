@@ -11,28 +11,30 @@ namespace AzizSama\MenuBuilder\Contracts;
  * @method array isEnabled(array $item) 
  */
 interface Filter
-{   
+{
     /**
      * Apply the filter.
      * 
      * @param  array $item
      * @return array
      */
-    public function apply();
+    public function apply(array $item): array;
 
     /**
      * Enable the item
      * 
+     * @param array $item
      * @return array
      */
-    public function enable();
+    public function enable(array $item): array;
 
     /**
      * Disable the item
      * 
+     * @param array $item
      * @return array
      */
-    public function disable();
+    public function disable(array $item): array;
 
     /**
      * Check if the item is enabled
@@ -40,5 +42,5 @@ interface Filter
      * @param  array $item
      * @return boolean
      */
-    public function isEnabled();
+    public function isEnabled(array $item): bool;
 }

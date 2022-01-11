@@ -2,7 +2,7 @@
 
 namespace AzizSama\MenuBuilder\Providers;
 
-use AzizSama\MenuBuilder\Builder\Builder;
+use AzizSama\MenuBuilder\Console\Commands\FilterMakeCommand;
 use AzizSama\MenuBuilder\Events\BuildingMenu;
 use AzizSama\MenuBuilder\MenuBuilder;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -16,7 +16,7 @@ class MenuBuilderServiceProvider extends \Illuminate\Support\ServiceProvider
      * @var \Illuminate\Contracts\Events\Dispatcher
      */
     protected $events;
-    
+
     /**
      * Bootstrap the application services.
      *
@@ -35,9 +35,9 @@ class MenuBuilderServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom($this->packagePath('config/menu-builder.php'), 'menu-builder');
-
         $this->registerMenuBuilder();
         $this->publish();
+        $this->registerCommands();
     }
 
     /**
@@ -59,6 +59,18 @@ class MenuBuilderServiceProvider extends \Illuminate\Support\ServiceProvider
     }
 
     /**
+     * Register the artisan commands.
+     * 
+     * @return void
+     */
+    protected function registerCommands()
+    {
+        $this->commands([
+            FilterMakeCommand::class
+        ]);
+    }
+
+    /**
      * Register the event listeners.
      *
      * @param \Illuminate\Contracts\Events\Dispatcher $events
@@ -69,7 +81,7 @@ class MenuBuilderServiceProvider extends \Illuminate\Support\ServiceProvider
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
             $builder = $event->builder;
             $groupedMenu = $this->app['config']['menu-builder.menu'];
-            foreach($groupedMenu as $group => $items) {
+            foreach ($groupedMenu as $group => $items) {
                 $builder->add($group, ...$items);
             }
         });

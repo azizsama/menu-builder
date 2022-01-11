@@ -62,10 +62,10 @@ class Builder
     public function add(string $group = 'main', ...$items): self
     {
         $results = $this->transformItems($items);
-        if (! isset($this->items[$group])) {
+        if (!isset($this->items[$group])) {
             $this->items[$group] = [];
         }
-        if (! empty($results)) {
+        if (!empty($results)) {
             array_push($this->items[$group], ...$results);
         }
         return $this;
@@ -81,7 +81,7 @@ class Builder
     public function addBefore($before, ...$items): self
     {
         $results = $this->transformItems($items);
-        if (! empty($results)) {
+        if (!empty($results)) {
             $this->addItem($before, static::ADD_BEFORE, ...$results);
         }
         return $this;
@@ -97,7 +97,7 @@ class Builder
     public function addAfter($after, ...$items): self
     {
         $results = $this->transformItems($items);
-        if (! empty($results)) {
+        if (!empty($results)) {
             $this->addItem($after, static::ADD_AFTER, ...$results);
         }
         return $this;
@@ -113,7 +113,7 @@ class Builder
     public function addInside($inside, ...$items): self
     {
         $results = $this->transformItems($items);
-        if (! empty($results)) {
+        if (!empty($results)) {
             $this->addItem($inside, static::ADD_INSIDE, ...$results);
         }
         return $this;
@@ -128,14 +128,14 @@ class Builder
      */
     public function addItem($key, $type, ...$items)
     {
-        if (! ($itemPath = $this->getIndex($key, $this->items))) {
+        if (!($itemPath = $this->getIndex($key, $this->items))) {
             return;
         }
 
-        if (! is_array($itemPath)) {
+        if (!is_array($itemPath)) {
             dd($itemPath);
         }
-        
+
         $index = end($itemPath);
         reset($itemPath);
 
@@ -207,7 +207,7 @@ class Builder
      */
     public function edit($key, $item): self
     {
-        if (! ($itemPath = $this->getIndex($key, $this->items))) {
+        if (!($itemPath = $this->getIndex($key, $this->items))) {
             return $this;
         }
 
@@ -234,7 +234,7 @@ class Builder
      */
     public function removeItem($key): self
     {
-        if (! ($itemPath = $this->getIndex($key, $this->items))) {
+        if (!($itemPath = $this->getIndex($key, $this->items))) {
             return $this;
         }
 
@@ -266,7 +266,7 @@ class Builder
                 return [$idx];
             } elseif (isset($item['childs'])) {
                 $childPath = $this->getIndex($key, $item['childs']);
-                if (! empty($childPath)) {
+                if (!empty($childPath)) {
                     return array_merge([$idx, 'childs'], $childPath);
                 }
             }
@@ -285,7 +285,7 @@ class Builder
         $results = [];
         foreach ($items as $item) {
             $result = $this->transformItem($item);
-            if (! empty($result) && ! self::isDisabled($result)) {
+            if (!empty($result) && !self::isDisabled($result)) {
                 array_push($results, $result);
             }
         }
@@ -311,7 +311,6 @@ class Builder
             if (isset($result['childs'])) {
                 $result['childs'] = $this->transformItems($result['childs']);
             }
-            
         }
         return $result;
     }
@@ -328,31 +327,29 @@ class Builder
             $item['href'] = Str::startsWith($item['href'], 'http') ? $item['href'] : url($item['href']);
         } else {
             $item['href'] = isset($item['route'])
-                                        ? route($item['route'])
-                                        : (
-                                            isset($item['url'])
-                                                ? (
-                                                    Str::startsWith($item['url'], 'http')
-                                                        ? $item['url']
-                                                        : url($item['url'])
-                                                )
-                                                : ''
-                                          );
+                ? route($item['route'])
+                : (isset($item['url'])
+                    ? (Str::startsWith($item['url'], 'http')
+                        ? $item['url']
+                        : url($item['url'])
+                    )
+                    : ''
+                );
         }
 
-        $item['icon'] = isset($item['icon']) 
-                                    ? $item['icon'] 
-                                    : null;
+        $item['icon'] = isset($item['icon'])
+            ? $item['icon']
+            : null;
 
         $item['target'] = isset($item['target'])
-                                    ? $item['target']
-                                    : '';
+            ? $item['target']
+            : '';
 
         self::setDataset($item);
 
         $item['active'] = self::setActive($item);
-        
-        if (isset($item['childs']) && ! empty($item['childs'])) {
+
+        if (isset($item['childs']) && !empty($item['childs'])) {
             $childs = [];
             foreach ($item['childs'] as $child) {
                 $child = $this->transform($child);
@@ -362,7 +359,7 @@ class Builder
             $item['childs'] = $childs;
         }
 
-        if (! isset($item['key'])) {
+        if (!isset($item['key'])) {
             $item['key'] = Str::random(strlen($item['text']));
         }
 
@@ -419,7 +416,7 @@ class Builder
         $items = [];
         foreach ($this->items as $key => $item) {
             if (is_string($key)) {
-                foreach($item as $it) {
+                foreach ($item as $it) {
                     $items[$key][] = self::castAsItem($it);
                 }
             } else {
@@ -448,6 +445,6 @@ class Builder
      */
     public static function isDisabled(array $item)
     {
-        return isset($item['disabled']) && $item['disabled'] === true;
+        return isset($item['disabled']) && $item['disabled'] !== true;
     }
 }
