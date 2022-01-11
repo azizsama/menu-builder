@@ -1,0 +1,29 @@
+{
+    "name": "azizsama/laravel-menu-builder",
+    "description": "Easy Menu Builder for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "AzizSama\\MenuBuilder\\": "src/"
+        },
+        "files": [
+            "src/function.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Aziz Febriyanto",
+            "email": "azizfebriyanto12@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AzizSama\\MenuBuilder\\MenuBuilderServiceProvider"
+            ]
+        }
+    }
+}
