@@ -8,7 +8,7 @@
             "AzizSama\\MenuBuilder\\": "src/"
         },
         "files": [
-            "src/function.php"
+            "src/functions.php"
         ]
     },
     "authors": [
