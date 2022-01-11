@@ -49,53 +49,14 @@ return [
         ],
         'sidebar' => [
             [
-                'text' => 'Manga',
-                'icon' => 'BookOpen',
+                'text' => 'Dashboard',
+                'icon' => 'DashboardIcon',
                 'target' => '',
                 'active' => [
-                    '/admin/manga',
+                    '/admin/',
                 ],
-                'childs' => [
-                    [
-                        'text' => 'List',
-                        'url' => '/admin/manga',
-                        'target' => '',
-                        'active' => [
-                            '/admin/manga',
-                        ],
-                        'icon' => 'MenuAlt4'
-                    ],
-                    [
-                        'text' => 'Create',
-                        'url' => '/admin/manga/create',
-                        'target' => '',
-                        'active' => [
-                            '/admin/manga/create',
-                        ],
-                        'icon' => 'Plus',
-                    ],
-                    [
-                        'text' => 'Chapters',
-                        'target' => '',
-                        'active' => [
-                            '/admin/manga/chapters',
-                        ],
-                        'icon' => 'BookOpen',
-                        'childs' => [
-                            [
-                                'text' => 'Create',
-                                'url' => '/admin/manga/chapter/create',
-                                'target' => '',
-                                'active' => [
-                                    '/admin/manga/chapter/create',
-                                ],
-                                'icon' => 'Plus',
-                            ]
-                        ]
-                    ],
-                ]
             ],
-        ]
+        ],
     ],
 
     /*
