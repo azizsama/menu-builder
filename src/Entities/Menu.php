@@ -2,8 +2,12 @@
 
 namespace AzizSama\MenuBuilder\Entities;
 
+use AzizSama\MenuBuilder\Concerns\HasAttribute;
+
 class Menu
 {
+    use HasAttribute;
+
     /**
      * Create a new Menu instance
      * 
@@ -13,7 +17,7 @@ class Menu
     public function __construct(array $attributes = [])
     {
         foreach ($attributes as $attr => $value) {
-            $this->{$attr} = $value;
+            $this->setAttribute($attr, $value);
         }
     }
 
